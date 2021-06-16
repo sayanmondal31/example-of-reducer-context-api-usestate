@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import LoginContext from "./Login-context";
 
 const defaultLoginState = {
@@ -9,12 +9,7 @@ const defaultLoginState = {
 
 const loginReducer = (state, action) => {
   if (action.type === "LOGIN") {
-    console.log(
-      action.email,
-      action.password,
-      action.isLogin,
-      "reducer called"
-    );
+
     return {
       email: action.email,
       password: action.password,
@@ -45,6 +40,10 @@ function LoginProvider(props) {
       password: password,
       isLogin: true
     });
+    // const email = loginState.email.toString()
+    localStorage.setItem("isLogin","1")
+    localStorage.setItem("email",email)
+    
   }
 
   function logOutHandler() {
@@ -52,7 +51,28 @@ function LoginProvider(props) {
       type: "LOGOUT",
       isLogin: false
     });
+    localStorage.setItem("isLogin","0")
+    localStorage.setItem("email","")
   }
+  
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("isLogin")
+    const LoggedInEmail = localStorage.getItem("email")
+
+    if(loginStatus === "1"){
+      dispatchLogin({
+        type: "LOGIN",
+        email: LoggedInEmail,
+        isLogin: true
+      })
+    }else{
+      dispatchLogin({
+        type: "LOGOUT",
+        isLogin: false
+      })
+    }
+
+  }, [])
 
   const loginContext = {
     email: loginState.email, // dynamic ,,, value will send to login context

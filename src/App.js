@@ -11,9 +11,7 @@ export default function App() {
   return (
     <>
       Example of Reducer
-      {console.log("app", loginCtx.email)}
       {!loginCtx.isLogin && <Login />}
-      {loginCtx.email}
       {loginCtx.isLogin && <Home />}
     </>
   );
