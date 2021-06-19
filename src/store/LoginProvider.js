@@ -75,7 +75,7 @@ function LoginProvider(props) {
   }, [])
 
   const loginContext = {
-    email: loginState.email, // dynamic ,,, value will send to login context
+    email: loginState.email, 
     password: loginState.password, // dynamic ,,, value will send to login context
     login: loginHandler,
     logout: logOutHandler,

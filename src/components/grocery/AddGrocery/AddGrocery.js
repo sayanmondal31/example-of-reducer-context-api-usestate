@@ -10,7 +10,7 @@ function AddGrocery() {
 
   function groceryInfoAddHandler(event){
     event.preventDefault()
-
+    
     const nameInput = groceryNameInputRef.current.value
     const priceInput = groceryPriceInputRef.current.value
 
